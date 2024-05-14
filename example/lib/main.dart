@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
@@ -103,6 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 screenshotController
                     .capture(delay: Duration(milliseconds: 10))
                     .then((capturedImage) async {
+                  FileSaver.instance
+                      .saveFile(name: 'test.png', bytes: capturedImage!);
+
                   ShowCapturedWidget(context, capturedImage!);
                 }).catchError((onError) {
                   print(onError);
